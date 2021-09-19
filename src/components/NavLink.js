@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components';
 import useWindowDimensions from '../utils/useWindowDimensions';
@@ -28,15 +28,25 @@ export default function NavLink() {
     return (
         <LinkContainer>
             <MenuList onClick={openMenu}>Menu</MenuList>
-            {isOpen && <Menu handleClick={closeMenu}/>}
+            {isOpen && <Menu isOpen={isOpen} closeMenu={closeMenu}/>}
         </LinkContainer>
     )
 }
 
-const Menu = ({handleClick}) => {
+const Menu = ({closeMenu, isOpen}) => {
+
+    useEffect(()=>{
+        document.addEventListener('keydown', (e) => {
+          e.key === 'Escape' && closeMenu()
+        })
+        return () => {
+          document.removeEventListener('keydown', (e) => e)
+        }
+      }, [isOpen, closeMenu])
+
     return (
         <MenuContainer>
-            <CloseIcon handleClick={handleClick}/>
+            <CloseIcon handleClick={closeMenu} role='button'/>
             <ul>
             <li><Link to = '/'>Home</Link></li>
                 <li><Link to = '/projects'>Projects</Link></li>
@@ -101,7 +111,7 @@ const MenuContainer = styled.div`
 
 const CloseIcon = ({handleClick}) => {
     return (
-        <CloseIconContainer onClick={handleClick}>
+        <CloseIconContainer onClick={handleClick} role='button'>
             <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 6.75L6.75 17.25"></path>
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75 6.75L17.25 17.25"></path>

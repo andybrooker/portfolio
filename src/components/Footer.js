@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export default function Footer() {
     return (
         <FooterWrapper>
-            Made by Andy / 2021 / Experimenting with GatsbyJS
+            <span>Made by Andy / 2021 / Experimenting with GatsbyJS</span>
         </FooterWrapper>
     )
 }

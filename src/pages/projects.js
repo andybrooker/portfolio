@@ -1,10 +1,13 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "../components/Navbar";
+import { colors } from "../styles/styles";
+import '../styles/global.css'
+import UnderConstruction from '../assets/underconstruction.png'
 
 export default function projects() {
     return (
-        <>
+        <div style = {{backgroundColor: `${colors.orangeBackground}`}}>
             <Helmet>
                 <title>Projects • Andy Brooker</title>
                 <meta charset="utf-8"/>
@@ -20,10 +23,10 @@ export default function projects() {
                 <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32"/>
                 <link rel="stylesheet" href="https://use.typekit.net/nfa2cmi.css"/>
             </Helmet>
-            <Navbar color='red'/>
+            <Navbar color={colors.orange}/>
             <main>
-                
+                <img src = {UnderConstruction}/>
             </main>
-        </>
+        </div>
     )
 }
